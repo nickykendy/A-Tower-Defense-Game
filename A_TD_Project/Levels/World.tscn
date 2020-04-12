@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Controller.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Base.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -20, 2.97757, 0, 0, 0, 0, -20, 102.978, 0, 0, 0, 0, -100, 102.978, 0, 0, 0, 0, -100, 302.978, 0, 0, 0, 0, -20, 302.978, 0, 0, 0, 0, -20, 402.978 )
+}
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -100, 0, 0, 0, 0, 0, -100, 99.9776, 0, 0, 0, 0, -20, 100, 0, 0, 0, 0, -20, 300, 0, 0, 0, 0, -100, 300, 0, 0, 0, 0, -100, 400 )
+}
+
+[node name="World" type="Node2D"]
+
+[node name="Controller" parent="." instance=ExtResource( 1 )]
+
+[node name="Player" type="Position2D" parent="."]
+position = Vector2( 360, 440 )
+script = ExtResource( 2 )
+
+[node name="Hands" type="ColorRect" parent="Player"]
+margin_left = -240.0
+margin_top = -40.0
+margin_right = 240.0
+margin_bottom = 40.0
+color = Color( 0.027451, 0.192157, 0.32549, 0.517647 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Deck" type="ColorRect" parent="Player"]
+margin_left = 280.0
+margin_top = 3.0
+margin_right = 347.0
+margin_bottom = 35.0
+color = Color( 0.0431373, 0.937255, 0.247059, 0.423529 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeckNum" type="Label" parent="Player/Deck"]
+margin_right = 67.0
+margin_bottom = 31.0
+text = "99"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pile" type="ColorRect" parent="Player"]
+margin_left = 280.0
+margin_top = -36.0
+margin_right = 347.0
+margin_bottom = -4.0
+color = Color( 0.937255, 0.294118, 0.0431373, 0.423529 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PileNum" type="Label" parent="Player/Pile"]
+margin_right = 67.0
+margin_bottom = 31.0
+text = "99"
+align = 1
+valign = 1
+
+[node name="Base" parent="." instance=ExtResource( 3 )]
+position = Vector2( 300, 140 )
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Level"]
+modulate = Color( 0, 1, 0.0862745, 1 )
+position = Vector2( 360, -2.978 )
+curve = SubResource( 1 )
+
+[node name="Path2D2" type="Path2D" parent="Level"]
+modulate = Color( 0, 1, 0.0862745, 1 )
+position = Vector2( 480, 0.0220032 )
+curve = SubResource( 2 )
+[connection signal="DeckChange" from="Controller" to="Player" method="_on_Controller_DeckChange"]
+[connection signal="PileChange" from="Controller" to="Player" method="_on_Controller_PileChange"]
