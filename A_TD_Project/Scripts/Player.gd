@@ -2,6 +2,9 @@ extends Position2D
 
 onready var deckNum = $Deck/DeckNum
 onready var pileNum = $Pile/PileNum
+onready var SelectedDesc = $Selected/SelectedCardDesc
+onready var HoverDesc = $Hover/HoverCardDesc
+
 var data = null
 
 func _ready():
@@ -14,3 +17,10 @@ func _on_Controller_DeckChange(num):
 
 func _on_Controller_PileChange():
 	pass # Replace with function body.
+
+func _on_Controller_SelectChange(cardId: String) -> void:
+	if cardId != "":
+		var desc = data.get_card_by_id(cardId)["desc"]
+		SelectedDesc.text = desc
+	else:
+		SelectedDesc.text = ""

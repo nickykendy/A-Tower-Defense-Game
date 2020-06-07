@@ -3,85 +3,184 @@ extends Node2D
 const SPRITE = "res://Sprites/"
 const CARDS = {
 	"cardA": {
-		"sprite": SPRITE + "Cards/Spr_card_A.png",
-		"slot": "NONE"
+		"cardSprite": SPRITE + "Cards/Spr_card_A.png",
+		"towerSprite": SPRITE + "Towers/Tower_A.png",
+		"name": "Tower A",
+		"cost": 10,
+		"buildTime": 2.0,
+		"attack": 5,
+		"rate": 0.5,
+		"range": 5,
+		"attribute": "fire",
+		"desc": "This is card A."
 	},
 	"cardB": {
-		"sprite": SPRITE + "Cards/Spr_card_B.png",
-		"slot": "NONE"
+		"cardSprite": SPRITE + "Cards/Spr_card_B.png",
+		"towerSprite": SPRITE + "Towers/Tower_A.png",
+		"name": "Tower A",
+		"cost": 10,
+		"buildTime": 2.0,
+		"attack": 5,
+		"rate": 0.5,
+		"range": 5,
+		"attribute": "fire",
+		"desc": "This is card B."
 	},
 	"cardC": {
-		"sprite": SPRITE + "Cards/Spr_card_C.png",
-		"slot": "NONE"
+		"cardSprite": SPRITE + "Cards/Spr_card_C.png",
+		"towerSprite": SPRITE + "Towers/Tower_A.png",
+		"name": "Tower A",
+		"cost": 10,
+		"buildTime": 2.0,
+		"attack": 5,
+		"rate": 0.5,
+		"range": 5,
+		"attribute": "fire",
+		"desc": "This is card C."
 	},
 	"cardD":{
-		"sprite": SPRITE + "Cards/Spr_card_D.png",
-		"slot": "NONE"
+		"cardSprite": SPRITE + "Cards/Spr_card_D.png",
+		"towerSprite": SPRITE + "Towers/Tower_A.png",
+		"name": "Tower A",
+		"cost": 10,
+		"buildTime": 2.0,
+		"attack": 5,
+		"rate": 0.5,
+		"range": 5,
+		"attribute": "fire",
+		"desc": "This is card D."
 	},
 	"cardE":{
-		"sprite": SPRITE + "Cards/Spr_card_E.png",
-		"slot": "NONE"
+		"cardSprite": SPRITE + "Cards/Spr_card_E.png",
+		"towerSprite": SPRITE + "Towers/Tower_A.png",
+		"name": "Tower A",
+		"cost": 10,
+		"buildTime": 2.0,
+		"attack": 5,
+		"rate": 0.5,
+		"range": 5,
+		"attribute": "fire",
+		"desc": "This is card E."
 	},
 	"cardF":{
-		"sprite": SPRITE + "Cards/Spr_card_F.png",
-		"slot": "NONE"
+		"cardSprite": SPRITE + "Cards/Spr_card_F.png",
+		"towerSprite": SPRITE + "Towers/Tower_A.png",
+		"name": "Tower A",
+		"cost": 10,
+		"buildTime": 2.0,
+		"attack": 5,
+		"rate": 0.5,
+		"range": 5,
+		"attribute": "fire",
+		"desc": "This is card F."
 	},
 	"cardG":{
-		"sprite": SPRITE + "Cards/Spr_card_G.png",
-		"slot": "NONE"
+		"cardSprite": SPRITE + "Cards/Spr_card_G.png",
+		"towerSprite": SPRITE + "Towers/Tower_A.png",
+		"name": "Tower A",
+		"cost": 10,
+		"buildTime": 2.0,
+		"attack": 5,
+		"rate": 0.5,
+		"range": 5,
+		"attribute": "fire",
+		"desc": "This is card G."
 	},
 	"cardH":{
-		"sprite": SPRITE + "Cards/Spr_card_H.png",
-		"slot": "NONE"
+		"cardSprite": SPRITE + "Cards/Spr_card_H.png",
+		"towerSprite": SPRITE + "Towers/Tower_A.png",
+		"name": "Tower A",
+		"cost": 10,
+		"buildTime": 2.0,
+		"attack": 5,
+		"rate": 0.5,
+		"range": 5,
+		"attribute": "fire",
+		"desc": "This is card H."
 	},
 	"cardI":{
-		"sprite": SPRITE + "Cards/Spr_card_I.png",
-		"slot": "NONE"
+		"cardSprite": SPRITE + "Cards/Spr_card_I.png",
+		"towerSprite": SPRITE + "Towers/Tower_A.png",
+		"name": "Tower A",
+		"cost": 10,
+		"buildTime": 2.0,
+		"attack": 5,
+		"rate": 0.5,
+		"range": 5,
+		"attribute": "fire",
+		"desc": "This is card I."
 	},
 	"cardJ":{
-		"sprite": SPRITE + "Cards/Spr_card_J.png",
-		"slot": "NONE"
+		"cardSprite": SPRITE + "Cards/Spr_card_J.png",
+		"towerSprite": SPRITE + "Towers/Tower_A.png",
+		"name": "Tower A",
+		"cost": 10,
+		"buildTime": 2.0,
+		"attack": 5,
+		"rate": 0.5,
+		"range": 5,
+		"attribute": "fire",
+		"desc": "This is card J."
 	},
 	"cardK":{
-		"sprite": SPRITE + "Cards/Spr_card_K.png",
-		"slot": "NONE"
+		"cardSprite": SPRITE + "Cards/Spr_card_K.png",
+		"towerSprite": SPRITE + "Towers/Tower_A.png",
+		"name": "Tower A",
+		"cost": 10,
+		"buildTime": 2.0,
+		"attack": 5,
+		"rate": 0.5,
+		"range": 5,
+		"attribute": "fire",
+		"desc": "This is card K."
 	},
 	"cardL":{
-		"sprite": SPRITE + "Cards/Spr_card_L.png",
-		"slot": "NONE"
+		"cardSprite": SPRITE + "Cards/Spr_card_L.png",
+		"towerSprite": SPRITE + "Towers/Tower_A.png",
+		"name": "Tower A",
+		"cost": 10,
+		"buildTime": 2.0,
+		"attack": 5,
+		"rate": 0.5,
+		"range": 5,
+		"attribute": "fire",
+		"desc": "This is card L."
 	},
 	"cardM":{
-		"sprite": SPRITE + "Cards/Spr_card_M.png",
-		"slot": "NONE"
+		"cardSprite": SPRITE + "Cards/Spr_card_M.png",
+		"towerSprite": SPRITE + "Towers/Tower_A.png",
+		"name": "Tower A",
+		"cost": 10,
+		"buildTime": 2.0,
+		"attack": 5,
+		"rate": 0.5,
+		"range": 5,
+		"attribute": "fire",
+		"desc": "This is card M."
 	},
 	"cardN":{
-		"sprite": SPRITE + "Cards/Spr_card_N.png",
-		"slot": "NONE"
-	},
-	"ERROR":{
-		"sprite": SPRITE + "Cards/Spr_card_back.png",
-		"slot": "NONE"
-	}
-}
-
-const TOWERS = {
-	"TowerA":{
-		"sprite": SPRITE + "Towers/Tower_A.png",
+		"cardSprite": SPRITE + "Cards/Spr_card_N.png",
+		"towerSprite": SPRITE + "Towers/Tower_A.png",
 		"name": "Tower A",
+		"cost": 10,
 		"buildTime": 2.0,
 		"attack": 5,
 		"rate": 0.5,
 		"range": 5,
-		"attribute": "fire"
+		"attribute": "fire",
+		"desc": "This is card N."
 	},
 	"ERROR":{
-		"sprite": SPRITE + "Towers/Tower_A.png",
+		"cardSprite": SPRITE + "Cards/Spr_card_back.png",
+		"towerSprite": SPRITE + "Towers/Tower_A.png",
 		"name": "Tower A",
+		"cost": 10,
 		"buildTime": 2.0,
 		"attack": 5,
 		"rate": 0.5,
 		"range": 5,
-		"attribute": "fire"
+		"attribute": "fire",
+		"desc": "Error."
 	}
 }
 
@@ -102,9 +201,3 @@ func get_card_by_id(card_id: String) -> Array:
 		return CARDS[card_id]
 	else:
 		return CARDS["ERROR"]
-
-func get_tower_by_id(tower_id: String) -> Array:
-	if tower_id in TOWERS:
-		return TOWERS[tower_id]
-	else:
-		return TOWERS["ERROR"]

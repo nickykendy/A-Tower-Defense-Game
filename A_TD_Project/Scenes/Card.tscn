@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
+[ext_resource path="res://Sprites/Cards/Spr_cardEnable.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Card.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Cards/Spr_cardDisable.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 22.5, 32 )
@@ -15,3 +17,11 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="Spr_cardDisable" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 3 )
+
+[node name="Spr_cardEnable" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )

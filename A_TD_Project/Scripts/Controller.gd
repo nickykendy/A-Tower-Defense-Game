@@ -1,14 +1,14 @@
 class_name Controller
 extends KinematicBody2D
 
-var card: Card = null
-var state: String = "free"
+var cardId: String
 var deck: Array
 var pile: Array
-var hands: Array
-var handCards: Array
-var handLimit = 5
+var hands: Array # the data of every card in hands
+var handCards: Array # the instance of every card in hands
+var handLimit: int = 5
 var data = null
+var tower: Tower
 
 const CARD_WIDTH: float = 45.0
 const SPACE: float = 10.0
@@ -17,6 +17,7 @@ const TOWER: Resource = preload("res://Scenes/Tower.tscn")
 
 signal DeckChange
 signal PileChange
+signal SelectChange
 
 func _ready():
 	randomize()
@@ -24,6 +25,12 @@ func _ready():
 	deck = data.INITDECK
 	deck.shuffle()
 	
+#	var spaces = get_tree().get_nodes_in_group("build_space")
+#	if spaces != null:
+#		print(spaces)
+#		for _space in spaces:
+#			_space.connect("body_entered", self, "_on_Area2D_body_entered")
+#			_space.connect("body_exited", self, "_on_Area2D_body_exited")
 	
 func _process(delta):
 	# custom cursor
@@ -31,24 +38,30 @@ func _process(delta):
 	# init some varibles
 	var _leftMouse = Input.is_mouse_button_pressed(BUTTON_LEFT)
 	var _play = Input.is_action_just_pressed("ui_accept")
-	
+	# deal cards on play
 	if _play:
 		var dealNum = handLimit - hands.size()
 		if dealNum > 0:
 			deal(dealNum)
-
-	# state: selected, held, free
-	if state == "selected" and card != null:
-		if _leftMouse:
-			if card.has_method("change_state"):
-				card.change_state("held")
-			state = "held"
-	elif state == "held" and card != null:
-		if !_leftMouse:
-			if card.has_method("change_state"):
-				card.change_state("free")
-			card = null
-			state = "free"
+			
+	if _leftMouse:
+		# clear what's holding
+		if cardId != "":
+			cardId = ""
+			delete_tower(tower)
+			
+		# clear select status for every card in hands
+		for _card in handCards:
+			if _card.isSelected:
+				_card.change_select(false)
+				
+		# select the card which is hover
+		for _card in handCards:
+			if _card.state == "hover":
+				_card.change_select(true)
+				cardId = _card.cardId
+				tower = create_tower(cardId)
+				emit_signal("SelectChange", cardId)
 
 # deal cards by num into hands
 func deal(num: int) -> void:
@@ -106,7 +119,22 @@ func fix_pos():
 func draw(index: int) -> Card:
 	var _card = CARD.instance()
 	var player = get_node("/root/World/Player")
+	var _cardId = hands[index]
 	player.add_child(_card)
-	_card.set_meta("id", deck[index])
-	_card.sprite.texture = (load(data.get_card_by_id(deck[index])["sprite"]))
+	_card.set_meta("id", _cardId)
+	_card.sprite.texture = (load(data.get_card_by_id(_cardId)["cardSprite"]))
+	_card.cardId = _cardId
 	return _card
+	
+func create_tower(id):
+	var _tower = TOWER.instance()
+	self.add_child(_tower)
+	#self.call_deferred("add_child", _tower)
+	_tower.set_meta("id", id)
+	_tower.sprite.texture = (load(data.get_card_by_id(id)["towerSprite"]))
+	_tower.towerId = id
+	return _tower
+	
+func delete_tower(obj) -> void:
+	if obj != null:
+		obj.queue_free()

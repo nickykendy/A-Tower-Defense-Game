@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/Controller.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Base.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/BuildSpace.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -31,6 +31,43 @@ color = Color( 0.027451, 0.192157, 0.32549, 0.517647 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Selected" type="ColorRect" parent="Player"]
+margin_left = -343.39
+margin_top = -430.906
+margin_right = -212.39
+margin_bottom = -240.906
+color = Color( 0.32549, 0.243137, 0.027451, 0.517647 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SelectedCardDesc" type="RichTextLabel" parent="Player/Selected"]
+margin_left = 11.5823
+margin_top = 12.9722
+margin_right = 120.582
+margin_bottom = 172.972
+text = "hahahahahahahahaha"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hover" type="ColorRect" parent="Player"]
+margin_left = -342.537
+margin_top = -235.397
+margin_right = -211.537
+margin_bottom = -45.3975
+color = Color( 0.027451, 0.32549, 0.235294, 0.517647 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverCardDesc" type="RichTextLabel" parent="Player/Hover"]
+margin_left = 9.7291
+margin_top = 9.72913
+margin_right = 120.729
+margin_bottom = 181.729
+text = "Hahahahahahahaha"
 
 [node name="Deck" type="ColorRect" parent="Player"]
 margin_left = 280.0
@@ -68,9 +105,9 @@ margin_bottom = 31.0
 text = "99"
 align = 1
 valign = 1
-
-[node name="Base" parent="." instance=ExtResource( 3 )]
-position = Vector2( 300, 140 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Level" type="Node2D" parent="."]
 
@@ -83,5 +120,36 @@ curve = SubResource( 1 )
 modulate = Color( 0, 1, 0.0862745, 1 )
 position = Vector2( 480, 0.0220032 )
 curve = SubResource( 2 )
+
+[node name="Base" type="Node2D" parent="."]
+position = Vector2( 300, 140 )
+
+[node name="BuildSpace" parent="Base" instance=ExtResource( 3 )]
+position = Vector2( 10, 10 )
+
+[node name="BuildSpace2" parent="Base" instance=ExtResource( 3 )]
+position = Vector2( 60, 10 )
+
+[node name="BuildSpace3" parent="Base" instance=ExtResource( 3 )]
+position = Vector2( 110, 10 )
+
+[node name="BuildSpace4" parent="Base" instance=ExtResource( 3 )]
+position = Vector2( 10, 60 )
+
+[node name="BuildSpace5" parent="Base" instance=ExtResource( 3 )]
+position = Vector2( 60, 60 )
+
+[node name="BuildSpace6" parent="Base" instance=ExtResource( 3 )]
+position = Vector2( 110, 60 )
+
+[node name="BuildSpace7" parent="Base" instance=ExtResource( 3 )]
+position = Vector2( 10, 110 )
+
+[node name="BuildSpace8" parent="Base" instance=ExtResource( 3 )]
+position = Vector2( 60, 110 )
+
+[node name="BuildSpace9" parent="Base" instance=ExtResource( 3 )]
+position = Vector2( 110, 110 )
 [connection signal="DeckChange" from="Controller" to="Player" method="_on_Controller_DeckChange"]
 [connection signal="PileChange" from="Controller" to="Player" method="_on_Controller_PileChange"]
+[connection signal="SelectChange" from="Controller" to="Player" method="_on_Controller_SelectChange"]

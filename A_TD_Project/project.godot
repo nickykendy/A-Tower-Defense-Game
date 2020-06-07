@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Area2D",
+"class": "BuildSpace",
+"language": "GDScript",
+"path": "res://Scripts/BuildSpace.gd"
+}, {
+"base": "Area2D",
 "class": "Card",
 "language": "GDScript",
 "path": "res://Scripts/Card.gd"
@@ -18,10 +23,17 @@ _global_script_classes=[ {
 "class": "Controller",
 "language": "GDScript",
 "path": "res://Scripts/Controller.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Tower",
+"language": "GDScript",
+"path": "res://Scripts/Tower.gd"
 } ]
 _global_script_class_icons={
+"BuildSpace": "",
 "Card": "",
-"Controller": ""
+"Controller": "",
+"Tower": ""
 }
 
 [application]
@@ -38,8 +50,8 @@ Data="*res://Scripts/Data.gd"
 
 window/size/width=720
 window/size/height=480
-window/size/test_width=720
-window/size/test_height=480
+window/size/test_width=1440
+window/size/test_height=960
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
