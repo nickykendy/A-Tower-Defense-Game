@@ -25,12 +25,6 @@ func _ready():
 	deck = data.INITDECK
 	deck.shuffle()
 	
-#	var spaces = get_tree().get_nodes_in_group("build_space")
-#	if spaces != null:
-#		print(spaces)
-#		for _space in spaces:
-#			_space.connect("body_entered", self, "_on_Area2D_body_entered")
-#			_space.connect("body_exited", self, "_on_Area2D_body_exited")
 	
 func _process(delta):
 	# custom cursor

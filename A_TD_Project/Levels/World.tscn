@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Controller.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/BuildSpace.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -121,35 +120,9 @@ modulate = Color( 0, 1, 0.0862745, 1 )
 position = Vector2( 480, 0.0220032 )
 curve = SubResource( 2 )
 
-[node name="Base" type="Node2D" parent="."]
-position = Vector2( 300, 140 )
-
-[node name="BuildSpace" parent="Base" instance=ExtResource( 3 )]
-position = Vector2( 10, 10 )
-
-[node name="BuildSpace2" parent="Base" instance=ExtResource( 3 )]
-position = Vector2( 60, 10 )
-
-[node name="BuildSpace3" parent="Base" instance=ExtResource( 3 )]
-position = Vector2( 110, 10 )
-
-[node name="BuildSpace4" parent="Base" instance=ExtResource( 3 )]
-position = Vector2( 10, 60 )
-
-[node name="BuildSpace5" parent="Base" instance=ExtResource( 3 )]
-position = Vector2( 60, 60 )
-
-[node name="BuildSpace6" parent="Base" instance=ExtResource( 3 )]
-position = Vector2( 110, 60 )
-
-[node name="BuildSpace7" parent="Base" instance=ExtResource( 3 )]
-position = Vector2( 10, 110 )
-
-[node name="BuildSpace8" parent="Base" instance=ExtResource( 3 )]
-position = Vector2( 60, 110 )
-
-[node name="BuildSpace9" parent="Base" instance=ExtResource( 3 )]
-position = Vector2( 110, 110 )
+[node name="TileMap" type="TileMap" parent="."]
+cell_size = Vector2( 40, 40 )
+format = 1
 [connection signal="DeckChange" from="Controller" to="Player" method="_on_Controller_DeckChange"]
 [connection signal="PileChange" from="Controller" to="Player" method="_on_Controller_PileChange"]
 [connection signal="SelectChange" from="Controller" to="Player" method="_on_Controller_SelectChange"]
