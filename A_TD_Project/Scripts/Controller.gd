@@ -1,19 +1,22 @@
 class_name Controller
 extends KinematicBody2D
 
-var cardId: String
-var deck: Array
-var pile: Array
-var hands: Array # the data of every card in hands
+var cardId : String
+var deck : Array
+var pile : Array
+var hands : Array # the data of every card in hands
 var handCards: Array # the instance of every card in hands
 var handLimit: int = 5
 var data = null
-var tower: Tower
+var tower : Tower
+var _level
+var _grid : Vector2
 
-const CARD_WIDTH: float = 45.0
-const SPACE: float = 10.0
-const CARD: Resource = preload("res://Scenes/Card.tscn")
-const TOWER: Resource = preload("res://Scenes/Tower.tscn")
+const CARD_WIDTH : float = 45.0
+const SPACE : float = 10.0
+const CARD : Resource = preload("res://Scenes/Card.tscn")
+const TOWER : Resource = preload("res://Scenes/Tower.tscn")
+const OFFSET : float = 20.0
 
 signal DeckChange
 signal PileChange
@@ -24,7 +27,7 @@ func _ready():
 	data = get_node("/root/Data")
 	deck = data.INITDECK
 	deck.shuffle()
-	
+	_level = get_node("/root/World/Level")
 	
 func _process(delta):
 	# custom cursor
@@ -39,6 +42,11 @@ func _process(delta):
 			deal(dealNum)
 			
 	if _leftMouse:
+		# check build tower
+		if check_cast_condition():
+			cast()
+			tower.begin_construct()
+			
 		# clear what's holding
 		if cardId != "":
 			cardId = ""
@@ -56,6 +64,15 @@ func _process(delta):
 				cardId = _card.cardId
 				tower = create_tower(cardId)
 				emit_signal("SelectChange", cardId)
+
+	# reposition the tower in the base square
+	if tower != null:
+		if _level.has_method("is_in_base"):
+			if _level.is_in_base(position):
+				_grid = _level.world_to_grid(position)
+				tower.position = _level.grid_to_world(_grid) + Vector2(OFFSET, OFFSET)
+			else:
+				tower.position = position
 
 # deal cards by num into hands
 func deal(num: int) -> void:
@@ -112,9 +129,9 @@ func fix_pos():
 # draw a single card and create its instance
 func draw(index: int) -> Card:
 	var _card = CARD.instance()
-	var player = get_node("/root/World/Player")
+	var _hud = get_node("/root/World/HUD")
 	var _cardId = hands[index]
-	player.add_child(_card)
+	_hud.add_child(_card)
 	_card.set_meta("id", _cardId)
 	_card.sprite.texture = (load(data.get_card_by_id(_cardId)["cardSprite"]))
 	_card.cardId = _cardId
@@ -122,8 +139,8 @@ func draw(index: int) -> Card:
 	
 func create_tower(id):
 	var _tower = TOWER.instance()
-	self.add_child(_tower)
-	#self.call_deferred("add_child", _tower)
+	var _world = get_node("/root/World")
+	_world.add_child(_tower)
 	_tower.set_meta("id", id)
 	_tower.sprite.texture = (load(data.get_card_by_id(id)["towerSprite"]))
 	_tower.towerId = id
@@ -132,3 +149,19 @@ func create_tower(id):
 func delete_tower(obj) -> void:
 	if obj != null:
 		obj.queue_free()
+
+func check_cast_condition() -> bool:
+	var result = false
+	if tower != null:
+		if _level.has_method("is_in_base"):
+			if _level.is_in_base(position):
+				result = true
+	return result
+	
+func cast() -> void:
+	for _card in handCards:
+		print(_card)
+		if _card.isSelected:
+			_card.queue_free()
+			fix_pos()
+			cardId = ""
