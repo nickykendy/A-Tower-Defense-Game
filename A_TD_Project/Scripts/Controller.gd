@@ -44,8 +44,14 @@ func _process(delta):
 	if _leftMouse:
 		# check build tower
 		if check_cast_condition():
-			cast()
-			tower.begin_construct()
+			for _card in handCards:
+				if _card != null and _card.isSelected:
+					_card.queue_free()
+					fix_pos()
+					cardId = ""
+			
+			if tower.has_method("begin_construct"):
+				tower.begin_construct()
 			
 		# clear what's holding
 		if cardId != "":
@@ -54,12 +60,12 @@ func _process(delta):
 			
 		# clear select status for every card in hands
 		for _card in handCards:
-			if _card.isSelected:
+			if _card != null and _card.isSelected:
 				_card.change_select(false)
 				
 		# select the card which is hover
 		for _card in handCards:
-			if _card.state == "hover":
+			if _card != null and _card.state == "hover":
 				_card.change_select(true)
 				cardId = _card.cardId
 				tower = create_tower(cardId)
@@ -67,12 +73,13 @@ func _process(delta):
 
 	# reposition the tower in the base square
 	if tower != null:
-		if _level.has_method("is_in_base"):
-			if _level.is_in_base(position):
-				_grid = _level.world_to_grid(position)
-				tower.position = _level.grid_to_world(_grid) + Vector2(OFFSET, OFFSET)
-			else:
-				tower.position = position
+		if tower.bBuild == false:
+			if _level.has_method("is_in_base"):
+				if _level.is_in_base(position):
+					_grid = _level.world_to_grid(position)
+					tower.position = _level.grid_to_world(_grid) + Vector2(OFFSET, OFFSET)
+				else:
+					tower.position = position
 
 # deal cards by num into hands
 func deal(num: int) -> void:
@@ -156,12 +163,5 @@ func check_cast_condition() -> bool:
 		if _level.has_method("is_in_base"):
 			if _level.is_in_base(position):
 				result = true
-	return result
 	
-func cast() -> void:
-	for _card in handCards:
-		print(_card)
-		if _card.isSelected:
-			_card.queue_free()
-			fix_pos()
-			cardId = ""
+	return result
