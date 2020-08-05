@@ -44,14 +44,18 @@ func _process(delta):
 	if _leftMouse:
 		# check build tower
 		if check_cast_condition():
+			var i = -1
 			for _card in handCards:
+				i = i + 1
 				if _card != null and _card.isSelected:
 					_card.queue_free()
+					handCards.remove(i)
 					fix_pos()
 					cardId = ""
 			
 			if tower.has_method("begin_construct"):
 				tower.begin_construct()
+				tower = null
 			
 		# clear what's holding
 		if cardId != "":
@@ -73,13 +77,12 @@ func _process(delta):
 
 	# reposition the tower in the base square
 	if tower != null:
-		if tower.bBuild == false:
-			if _level.has_method("is_in_base"):
-				if _level.is_in_base(position):
-					_grid = _level.world_to_grid(position)
-					tower.position = _level.grid_to_world(_grid) + Vector2(OFFSET, OFFSET)
-				else:
-					tower.position = position
+		if _level.has_method("is_in_base"):
+			if _level.is_in_base(position):
+				_grid = _level.world_to_grid(position)
+				tower.position = _level.grid_to_world(_grid) + Vector2(OFFSET, OFFSET)
+			else:
+				tower.position = position
 
 # deal cards by num into hands
 func deal(num: int) -> void:
