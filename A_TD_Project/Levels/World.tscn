@@ -157,5 +157,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="DeckChange" from="Controller" to="HUD" method="_on_Controller_DeckChange"]
-[connection signal="PileChange" from="Controller" to="HUD" method="_on_Controller_PileChange"]
+[connection signal="DiscardPileChange" from="Controller" to="HUD" method="_on_Controller_DiscardPileChange"]
 [connection signal="SelectChange" from="Controller" to="HUD" method="_on_Controller_SelectChange"]
