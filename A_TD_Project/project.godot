@@ -9,10 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Area2D",
-"class": "BuildSpace",
+"base": "RigidBody2D",
+"class": "Bullet",
 "language": "GDScript",
-"path": "res://Scripts/BuildSpace.gd"
+"path": "res://Scripts/Bullet.gd"
 }, {
 "base": "Area2D",
 "class": "Card",
@@ -25,14 +25,20 @@ _global_script_classes=[ {
 "path": "res://Scripts/Controller.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Scripts/Enemy.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Tower",
 "language": "GDScript",
 "path": "res://Scripts/Tower.gd"
 } ]
 _global_script_class_icons={
-"BuildSpace": "",
+"Bullet": "",
 "Card": "",
 "Controller": "",
+"Enemy": "",
 "Tower": ""
 }
 

@@ -7,16 +7,20 @@ onready var HoverDesc = $Hover/HoverCardDesc
 
 var data = null
 
+
 func _ready():
 	data = get_node("/root/Data")
 	deckNum.text = String(data.INITDECK.size())
 	pileNum.text = String(0)
 
+
 func _on_Controller_DeckChange(num):
 	deckNum.text = String(num)
 
+
 func _on_Controller_DiscardPileChange(num):
 	pileNum.text = String(num)
+
 
 func _on_Controller_SelectChange(cardId: String) -> void:
 	if cardId != "":

@@ -14,18 +14,22 @@ onready var sprEnable = $Spr_cardEnable
 export (String) var Name
 export (float) var Cost
 
+
 func _ready():
 	self.connect("body_exited", self, "_on_Area2D_body_exited")
+
 
 func _process(delta):
 	var bodies = get_overlapping_bodies()
 	for body in bodies:
 		if body.name == "Controller":
 			change_state("hover")
-		
+
+
 func _on_Area2D_body_exited(body: KinematicBody2D) -> void:
 	if body.name == "Controller":
 		change_state("free")
+
 
 func change_state(newState: String) -> void:
 	if state == "free" and newState == "hover":
@@ -35,6 +39,7 @@ func change_state(newState: String) -> void:
 		position.y += 10
 		state = "free"
 
+
 func change_select(newSelected: bool) -> void:
 	if newSelected:
 		isSelected = true
@@ -43,8 +48,6 @@ func change_select(newSelected: bool) -> void:
 		isSelected = false
 		sprEnable.visible = false
 
-func get_select_status() -> bool:
-	return isSelected
 
 func save_pos(pos: Vector2):
 	initPos = pos

@@ -20,13 +20,15 @@ signal DeckChange
 signal DiscardPileChange
 signal SelectChange
 
+
 func _ready():
 	randomize()
 	data = get_node("/root/Data")
 	deck = data.INITDECK
 	deck.shuffle()
 	_level = get_node("/root/World/Level")
-	
+
+
 func _process(delta):
 	# custom cursor
 	position = get_global_mouse_position()
@@ -94,11 +96,13 @@ func deal(num: int) -> void:
 		hands.append(_card)
 	fix_pos()
 	emit_signal("DeckChange", deck.size())
-	
+
+
 # recycle the pile into the deck
 func recycle() -> void:
 	transport(-1, discardPile, deck)
 	deck.shuffle()
+
 
 # push the front array of deck into another one: -1 all
 func transport(cardNum: int, oldDeck: Array, newDeck: Array) -> int:
@@ -118,6 +122,7 @@ func transport(cardNum: int, oldDeck: Array, newDeck: Array) -> int:
 	
 	return left
 
+
 # recalculate the position of every card in hand
 func fix_pos():
 	var newPos = 0
@@ -134,6 +139,7 @@ func fix_pos():
 		hands[i].position.x = newPos
 		hands[i].save_pos(hands[i].position)
 
+
 # draw a single card from the pile and create its instance
 func draw(pile: Array, index: int) -> Card:
 	var _card = CARD.instance()
@@ -144,7 +150,8 @@ func draw(pile: Array, index: int) -> Card:
 	_card.sprite.texture = (load(data.get_card_by_id(_cardId)["cardSprite"]))
 	_card.cardId = _cardId
 	return _card
-	
+
+
 func create_tower(id):
 	var _t = TOWER.instance()
 	var _world = get_node("/root/World")
@@ -153,10 +160,12 @@ func create_tower(id):
 	_t.sprite.texture = (load(data.get_card_by_id(id)["towerSprite"]))
 	_t.towerId = id
 	return _t
-	
+
+
 func delete_tower(obj) -> void:
 	if obj != null:
 		obj.queue_free()
+
 
 func check_cast_condition() -> bool:
 	var result = false

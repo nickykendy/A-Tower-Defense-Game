@@ -1,0 +1,13 @@
+[gd_scene format=2]
+
+[node name="SpawnCage" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -5.0
+margin_top = -5.0
+margin_right = 5.0
+margin_bottom = 5.0
+color = Color( 0.686275, 0.631373, 0.0509804, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
