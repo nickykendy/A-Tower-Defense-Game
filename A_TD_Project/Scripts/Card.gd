@@ -43,5 +43,8 @@ func change_select(newSelected: bool) -> void:
 		isSelected = false
 		sprEnable.visible = false
 
+func get_select_status() -> bool:
+	return isSelected
+
 func save_pos(pos: Vector2):
 	initPos = pos

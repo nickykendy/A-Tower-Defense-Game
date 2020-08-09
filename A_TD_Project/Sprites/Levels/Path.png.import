@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MouseCursor.png-2560d9a90745587e800e58198dcd3666.stex"
+path="res://.import/Path.png-934cf6e1066be789b7e1a16e884ad95a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/MouseCursor.png"
-dest_files=[ "res://.import/MouseCursor.png-2560d9a90745587e800e58198dcd3666.stex" ]
+source_file="res://Sprites/Levels/Path.png"
+dest_files=[ "res://.import/Path.png-934cf6e1066be789b7e1a16e884ad95a.stex" ]
 
 [params]
 
