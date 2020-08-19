@@ -31,4 +31,8 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Pivot" type="Node2D" parent="."]
+
+[node name="CoolDown" type="Timer" parent="."]
+one_shot = true
+autostart = true
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

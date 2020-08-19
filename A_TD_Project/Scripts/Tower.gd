@@ -4,11 +4,13 @@ extends KinematicBody2D
 onready var sprite = $Sprite
 onready var progress = $BuildTime
 onready var timer = $Timer
+onready var cd = $CoolDown
 onready var pivot = $Pivot
 
 var towerId: String
 var buildTime: float = 2.0
 var bBuild: bool = false
+var target
 
 const BULLET : Resource = preload("res://Scenes/Bullet.tscn")
 
@@ -24,9 +26,11 @@ func _process(delta):
 		progress.value = timer.time_left
 		
 	if bBuild:
-		var target = find_target()
-		yield(get_tree().create_timer(1.0), "timeout")
-		fire(target)
+		target = find_target()
+		if cd.time_left <= 0:
+			var _dir = global_position.direction_to(target.global_position)
+			cd.start(1)
+			fire(position, _dir, target)
 
 
 func _on_Timer_timeout():
@@ -50,8 +54,8 @@ func find_target():
 	return _enemies[_index]
 
 
-func fire(_target):
+func fire(_pos:Vector2, _dir:Vector2, _target=null) -> void:
 	var _b = BULLET.instance()
 	pivot.add_child(_b)
-	_b.add_force(global_position, _target.global_position)
+	_b.start(_pos, _dir, _target)
 	
